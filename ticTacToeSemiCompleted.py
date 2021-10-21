@@ -1,12 +1,16 @@
 #Tic Tac Toe
 #Kyiem Chandler
-#10/13/2021
+#10/21/2021
+#Add ons: Still trying to make a way to display the board on to the turtle grapics part for the python tool.
+
 
 from turtle import *
 import random
 
+#creates the board
 board = [' ' for x in range(10)]
 
+#Displays board in the console
 def printConsoleBoard(board):
     print('    |   |')
     print('  '+ board[1] + ' | ' + board[2] + ' | ' + board[3])
@@ -18,7 +22,7 @@ def printConsoleBoard(board):
 
 
 
-
+#Displays board in python tool "turtle" (Made just to have a bigger screen")
 def displayBoard():
     
     #Vertical left 
@@ -82,7 +86,7 @@ def playerTwo():
     return 'O'
 
 
-
+#Puts choices on turtle screen
 def Choice(playerChoice,turn):
     #X spot dictation
     if turn == 1:
@@ -161,7 +165,7 @@ def Choice(playerChoice,turn):
         if playerChoice == 9:
             setx(175)
             sety(-200)
-
+#Gets the player input to pick a choice on the board
 def playerMove():
     move = 0
     run = True
@@ -179,11 +183,12 @@ def playerMove():
                 print("Insert number from 1-9")
         except: 
             print("Type a number.")
-
+#Checks to see if the player or CPU has won
 def isWinner(board, le):
     return (board[1] == le and board[2] == le and board[3] == le) or (board[4] == le and board[5] == le and board[6] == le) or (board[7] == le and board[8] == le and board[9] == le) or (board[1] == le and board[5] == le and board[9] == le) or (board[3] == le and board[5] == le and board[7] == le) or (board[1] == le and board[4] == le and board[7] == le) or (board[2] == le and board[5] == le and board[8] == le) or (board[3] == le and board[6] == le and board[9] == le)
-        
+#CPU picks a spot on the board        
 def cpuMove():
+    #CPU checks the board to make sure the User does not win and then decides its choice
     possibleMoves = [x for x, letter in enumerate(board) if letter == ' ' and x != 0]
     move = 0
     for let in['O','X']:
@@ -211,7 +216,7 @@ def cpuMove():
             move = selectRandom(edgeOpen)
 
     return move
-
+#helps CPU randomly choose a spot
 def selectRandom(li):
     ln = len(li)
     r = random.randrange(0,ln)
@@ -220,20 +225,20 @@ def selectRandom(li):
 
 
 
-
+#Checks to see if the board has filled up
 def BoardFull(board):
     if board.count(' ') > 1:
         return False
     else:
         return True
 
-
+#Runs the program
 def main():
     turn = 1
     print("Tic Tac Toe Game")
     printConsoleBoard(board)
     displayBoard()
-
+#Keeps the game running if the board is not full
     while not(BoardFull(board)):
         if not(isWinner(board, 'O')):
             playerMove()
